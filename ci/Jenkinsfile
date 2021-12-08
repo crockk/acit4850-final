@@ -12,6 +12,7 @@ agent any
     stages {
         stage('Build') {
             steps {
+                sh 'echo $PWD'
                 sh 'pip install -r ../requirements.txt'
             }
         }
