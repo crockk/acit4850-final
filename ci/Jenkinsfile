@@ -14,7 +14,7 @@ agent any
             steps {
                 sh 'echo $PWD'
                 sh 'ls'
-                sh 'pip install -r ../requirements.txt'
+                sh 'pip install -r requirements.txt'
             }
         }
         stage('Code Quality') {
@@ -24,7 +24,7 @@ agent any
         }
         stage('Code Quantity') {
             steps {
-                sh 'ls ../*.py | wc -l'
+                sh 'ls *.py | wc -l'
             }
         }
         stage('Run Target') {
