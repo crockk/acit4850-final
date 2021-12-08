@@ -1,1 +1,52 @@
-hello
+/*
+Author: Nolan Crooks
+Date: Dec 8 2021
+Description: Jenkins pipeline for sample Python application (ACIT 4850 Final Exam)
+*/
+
+pipeline {
+agent any
+    parameters {
+        string(defaultValue: 'run', description: 'Run Target Scripts', name: 'TARGET')
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'pip install -r ../requirements.txt'
+            }
+        }
+        stage('Code Quality') {
+            steps {
+                sh 'pylint-fail-under --fail_under 5 *.py'
+            }
+        }
+        stage('Code Quantity') {
+            steps {
+                sh 'ls ../*.py | wc -l'
+            }
+        }
+        stage('Package') {
+            when {
+                expression { 
+                    TARGET == 'run' 
+                }
+            }
+            steps {
+                sh 'python main.py phone text output'
+                sh 'python main.py tablet csv output'
+                sh 'python main.py laptop json output'
+                sh 'python main.py phone yaml output'
+            }
+        }
+        stage('Package') {
+            steps {
+                sh 'zip app.zip *.py'
+            }
+            post {
+            always {
+                archiveArtifacts artifacts: 'app.zip'
+            }             
+            }
+        }
+    }
+}
