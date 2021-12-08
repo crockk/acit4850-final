@@ -25,7 +25,7 @@ agent any
                 sh 'ls ../*.py | wc -l'
             }
         }
-        stage('Package') {
+        stage('Run Target') {
             when {
                 expression { 
                     TARGET == 'run' 
