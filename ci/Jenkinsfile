@@ -44,9 +44,9 @@ agent any
                 echo 'Nolan Crooks, Group 7'
             }
             post {
-            always {
-                archiveArtifacts artifacts: 'app.zip'
-            }             
+                always {
+                    archiveArtifacts artifacts: 'app.zip'
+                }             
             }
         }
     }
