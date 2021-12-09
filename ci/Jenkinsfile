@@ -41,7 +41,7 @@ agent any
         stage('Package') {
             steps {
                 sh 'zip app.zip *.py'
-                echo 'Nolan Crooks, Group 7'
+                echo 'A01190324, Group 7'
             }
             post {
                 always {
